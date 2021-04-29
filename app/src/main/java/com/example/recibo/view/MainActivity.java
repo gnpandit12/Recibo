@@ -1,4 +1,4 @@
-package com.example.recibo.view;
+ package com.example.recibo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
