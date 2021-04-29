@@ -25,8 +25,6 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
     private TextView firstNameTextView, lastNameTextView, mobileNoTextView;
     private Button saveDetailsButton;
     private UserDetailsViewModel mUserDetailsViewModel;
-    private String userFirstName, userLastName, userMobileNumber;
-    private static final int REQUEST_CODE = 1;
     private UserDetails userDetails;
     private String firstNameString = "First Name";
     private String lastNameString = "Last Name";
@@ -51,29 +49,24 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
 
             Log.d(TAG, "Get user details...");
 
-            userFirstName = userDetails.getFirstName();
-            userLastName = userDetails.getLastName();
-            userMobileNumber = userDetails.getMobileNumber();
-
-            Log.d(TAG, "First name: "+userFirstName);
-            Log.d(TAG, "Last name: "+userLastName);
-            Log.d(TAG, "Mobile number: "+userMobileNumber);
-
-            //Set text view's with user details...
-            if(!TextUtils.isEmpty(userFirstName)){
-                firstNameTextView.setText(userFirstName);
+            //Set text view's with user details if not null...
+            if(!TextUtils.isEmpty(userDetails.getFirstName())){
+                Log.d(TAG, "First name: "+userDetails.getFirstName());
+                firstNameTextView.setText(userDetails.getFirstName());
             }else {
                 Log.d(TAG, "First name null");
                 firstNameTextView.setText(firstNameString);
             }
-            if(!TextUtils.isEmpty(userLastName)){
-                lastNameTextView.setText(userLastName);
+            if(!TextUtils.isEmpty(userDetails.getLastName())){
+                Log.d(TAG, "Last name: "+userDetails.getLastName());
+                lastNameTextView.setText(userDetails.getLastName());
             }else {
                 Log.d(TAG, "Last name null");
                 lastNameTextView.setText(lastNameString);
             }
-            if(!TextUtils.isEmpty(userMobileNumber)){
-                mobileNoTextView.setText(userMobileNumber);
+            if(!TextUtils.isEmpty(userDetails.getMobileNumber())){
+                Log.d(TAG, "Mobile number: "+userDetails.getMobileNumber());
+                mobileNoTextView.setText(userDetails.getMobileNumber());
             }else {
                 Log.d(TAG, "Mobile number null");
                 mobileNoTextView.setText(mobileNumberString);
