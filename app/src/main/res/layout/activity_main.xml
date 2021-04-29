@@ -43,12 +43,12 @@
                 android:hint="@string/enter_mobile_number"/>
 
             <Button
-                android:id="@+id/add_update_button"
+                android:id="@+id/save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textAlignment="center"
-                android:text="@string/add_details" />
+                android:text="@string/save_details" />
 
         </LinearLayout>
 
