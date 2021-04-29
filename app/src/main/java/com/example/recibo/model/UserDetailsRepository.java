@@ -31,10 +31,4 @@ public class UserDetailsRepository {
         });
     }
 
-    public void update(UserDetails userDetails) {
-        UserDetailsDatabase.databaseWriteExecutor.execute(() -> {
-            userDetailsDao.Update(userDetails);
-        });
-    }
-
 }

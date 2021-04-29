@@ -23,6 +23,4 @@ public class UserDetailsViewModel extends AndroidViewModel {
 
     public void insert(UserDetails userDetails) { userDetailsRepository.insert(userDetails); }
 
-    public void update(UserDetails userDetails) { userDetailsRepository.update(userDetails); }
-
 }
