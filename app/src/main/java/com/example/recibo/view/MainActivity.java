@@ -2,6 +2,8 @@
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -21,21 +23,22 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
 
      private static final String TAG = "MAIN_ACTIVITY";
      private ActivityMainBinding activityMainBinding;
-    private EditText firstNameEditText, lastNameEditText, mobileNoEditText;
-    private TextView firstNameTextView, lastNameTextView, mobileNoTextView;
-    private Button saveDetailsButton;
-    private UserDetailsViewModel mUserDetailsViewModel;
-    private String userFirstName, userLastName, userMobileNumber;
-    private UserDetails userDetails;
-    private String firstNameString = "First Name";
-    private String lastNameString = "Last Name";
-    private String mobileNumberString = "Mobile Number";
+     private EditText firstNameEditText, lastNameEditText, mobileNoEditText;
+     private TextView firstNameTextView, lastNameTextView, mobileNoTextView;
+     private Button saveDetailsButton;
+     private UserDetailsViewModel mUserDetailsViewModel;
+     private String userFirstName, userLastName, userMobileNumber;
+     private UserDetails userDetails = new UserDetails();
+     private String firstNameString = "User First Name";
+     private String lastNameString = "User Last Name";
+     private String mobileNumberString = "User Mobile Number";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        activityMainBinding.setLifecycleOwner(this);
         firstNameEditText = activityMainBinding.firstNameEditText;
         lastNameEditText = activityMainBinding.lastNameEditText;
         mobileNoEditText = activityMainBinding.mobileNoEditText;
@@ -47,34 +50,38 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
         mUserDetailsViewModel = new ViewModelProvider(this).get(UserDetailsViewModel.class);
 
         mUserDetailsViewModel.getUserDetails().observe(this, userDetails -> {
-
             Log.d(TAG, "Get user details...");
 
+            try {
+                Log.d(TAG, "onCreate: "+userDetails.getFirstName());
+            }catch (Exception e){
+                Log.d(TAG, "User Details Exception: "+e.toString());
+            }
             if (userDetails != null){
                 Log.d(TAG, "Get User Details Not Null...");
-                userFirstName = userDetails.getFirstName();
-                userLastName = userDetails.getLastName();
-                userMobileNumber = userDetails.getMobileNumber();
+//                userFirstName = userDetails.getFirstName();
+//                userLastName = userDetails.getLastName();
+//                userMobileNumber = userDetails.getMobileNumber();
 
-                Log.d(TAG, "Get First name: "+userFirstName);
-                Log.d(TAG, "Get Last name: "+userLastName);
-                Log.d(TAG, "Get Mobile number: "+userMobileNumber);
+                Log.d(TAG, "Get First name: "+userDetails.getFirstName());
+                Log.d(TAG, "Get Last name: "+userDetails.getLastName());
+                Log.d(TAG, "Get Mobile number: "+userDetails.getMobileNumber());
 
                 //Set text view's with user details...
-                if(!TextUtils.isEmpty(userFirstName)){
-                    firstNameTextView.setText(userFirstName);
+                if(!TextUtils.isEmpty(userDetails.getFirstName())){
+                    firstNameTextView.setText(userDetails.getFirstName());
                 }else {
                     Log.d(TAG, "First name null");
                     firstNameTextView.setText(firstNameString);
                 }
-                if(!TextUtils.isEmpty(userLastName)){
-                    lastNameTextView.setText(userLastName);
+                if(!TextUtils.isEmpty(userDetails.getLastName())){
+                    lastNameTextView.setText(userDetails.getLastName());
                 }else {
                     Log.d(TAG, "Last name null");
                     lastNameTextView.setText(lastNameString);
                 }
-                if(!TextUtils.isEmpty(userMobileNumber)){
-                    mobileNoTextView.setText(userMobileNumber);
+                if(!TextUtils.isEmpty(userDetails.getMobileNumber())){
+                    mobileNoTextView.setText(userDetails.getMobileNumber());
                 }else {
                     Log.d(TAG, "Mobile number null");
                     mobileNoTextView.setText(mobileNumberString);
@@ -82,7 +89,6 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
             }else {
                 Log.d(TAG, "Get User Details Null...");
             }
-
         });
 
         saveDetailsButton.setOnClickListener(this);
@@ -92,7 +98,6 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
      public void onClick(View v) {
          if (v == saveDetailsButton){
              Log.d(TAG, "Save Button Clicked");
-             userDetails = new UserDetails();
              String firstName = firstNameEditText.getText().toString().trim();
              String lastName = lastNameEditText.getText().toString().trim();
              String mobileNo = mobileNoEditText.getText().toString().trim();
