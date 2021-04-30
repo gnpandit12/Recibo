@@ -2,8 +2,6 @@
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -28,7 +26,7 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
      private Button saveDetailsButton;
      private UserDetailsViewModel mUserDetailsViewModel;
      private String userFirstName, userLastName, userMobileNumber;
-     private UserDetails userDetails = new UserDetails();
+     private UserDetails user_details = new UserDetails();
      private String firstNameString = "User First Name";
      private String lastNameString = "User Last Name";
      private String mobileNumberString = "User Mobile Number";
@@ -71,21 +69,21 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
                 //Set text view's with user details...
                 if(!TextUtils.isEmpty(userFirstName)){
                     firstNameTextView.setText(userFirstName);
-                    userDetails.setFirstName(userFirstName);
+                    user_details.setFirstName(userFirstName);
                 }else {
                     Log.d(TAG, "First name null");
                     firstNameTextView.setText(firstNameString);
                 }
                 if(!TextUtils.isEmpty(userLastName)){
                     lastNameTextView.setText(userLastName);
-                    userDetails.setLastName(userLastName);
+                    user_details.setLastName(userLastName);
                 }else {
                     Log.d(TAG, "Last name null");
                     lastNameTextView.setText(lastNameString);
                 }
                 if(!TextUtils.isEmpty(userMobileNumber)){
                     mobileNoTextView.setText(userMobileNumber);
-                    userDetails.setMobileNumber(userMobileNumber);
+                    user_details.setMobileNumber(userMobileNumber);
                 }else {
                     Log.d(TAG, "Mobile number null");
                     mobileNoTextView.setText(mobileNumberString);
@@ -111,21 +109,21 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
              Log.d(TAG, "User mobile number: "+mobileNo);
 
              if (!TextUtils.isEmpty(firstName)){
-                 userDetails.setFirstName(firstName);
+                 user_details.setFirstName(firstName);
                  firstNameEditText.getText().clear();
              }
              if (!TextUtils.isEmpty(lastName)){
-                 userDetails.setLastName(lastName);
+                 user_details.setLastName(lastName);
                  lastNameEditText.getText().clear();
              }
              if (!TextUtils.isEmpty(mobileNo)){
-                 userDetails.setMobileNumber(mobileNo);
+                 user_details.setMobileNumber(mobileNo);
                  mobileNoEditText.getText().clear();
              }
 
              // Insert User Details Into Room Database...
              Log.d(TAG, "Inserting user details in database...");
-             mUserDetailsViewModel.insert(userDetails);
+             mUserDetailsViewModel.insert(user_details);
 
 
          }
