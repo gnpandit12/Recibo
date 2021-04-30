@@ -53,35 +53,39 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
             Log.d(TAG, "Get user details...");
 
             try {
-                Log.d(TAG, "onCreate: "+userDetails.getFirstName());
+                userFirstName = userDetails.getFirstName();
+                Log.d(TAG, "onCreate: "+userFirstName);
             }catch (Exception e){
                 Log.d(TAG, "User Details Exception: "+e.toString());
             }
             if (userDetails != null){
                 Log.d(TAG, "Get User Details Not Null...");
-//                userFirstName = userDetails.getFirstName();
-//                userLastName = userDetails.getLastName();
-//                userMobileNumber = userDetails.getMobileNumber();
+                userFirstName = userDetails.getFirstName();
+                userLastName = userDetails.getLastName();
+                userMobileNumber = userDetails.getMobileNumber();
+                Log.d(TAG, "Get First name: "+userFirstName);
+                Log.d(TAG, "Get Last name: "+userLastName);
+                Log.d(TAG, "Get Mobile number: "+userMobileNumber);
 
-                Log.d(TAG, "Get First name: "+userDetails.getFirstName());
-                Log.d(TAG, "Get Last name: "+userDetails.getLastName());
-                Log.d(TAG, "Get Mobile number: "+userDetails.getMobileNumber());
 
                 //Set text view's with user details...
-                if(!TextUtils.isEmpty(userDetails.getFirstName())){
-                    firstNameTextView.setText(userDetails.getFirstName());
+                if(!TextUtils.isEmpty(userFirstName)){
+                    firstNameTextView.setText(userFirstName);
+                    userDetails.setFirstName(userFirstName);
                 }else {
                     Log.d(TAG, "First name null");
                     firstNameTextView.setText(firstNameString);
                 }
-                if(!TextUtils.isEmpty(userDetails.getLastName())){
-                    lastNameTextView.setText(userDetails.getLastName());
+                if(!TextUtils.isEmpty(userLastName)){
+                    lastNameTextView.setText(userLastName);
+                    userDetails.setLastName(userLastName);
                 }else {
                     Log.d(TAG, "Last name null");
                     lastNameTextView.setText(lastNameString);
                 }
-                if(!TextUtils.isEmpty(userDetails.getMobileNumber())){
-                    mobileNoTextView.setText(userDetails.getMobileNumber());
+                if(!TextUtils.isEmpty(userMobileNumber)){
+                    mobileNoTextView.setText(userMobileNumber);
+                    userDetails.setMobileNumber(userMobileNumber);
                 }else {
                     Log.d(TAG, "Mobile number null");
                     mobileNoTextView.setText(mobileNumberString);
@@ -108,12 +112,15 @@ import com.example.recibo.viewModel.UserDetailsViewModel;
 
              if (!TextUtils.isEmpty(firstName)){
                  userDetails.setFirstName(firstName);
+                 firstNameEditText.getText().clear();
              }
-             if(!TextUtils.isEmpty(lastName)){
+             if (!TextUtils.isEmpty(lastName)){
                  userDetails.setLastName(lastName);
+                 lastNameEditText.getText().clear();
              }
              if (!TextUtils.isEmpty(mobileNo)){
                  userDetails.setMobileNumber(mobileNo);
+                 mobileNoEditText.getText().clear();
              }
 
              // Insert User Details Into Room Database...

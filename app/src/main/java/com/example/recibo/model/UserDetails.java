@@ -7,13 +7,14 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "user_details")
 public class UserDetails {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int id;
-    @ColumnInfo(name = "first_name")
+
+//    @ColumnInfo(name = "first_name")
     private String firstName;
-    @ColumnInfo(name = "last_name")
+//    @ColumnInfo(name = "last_name")
     private String lastName;
-    @ColumnInfo(name = "mobile_number")
+//    @ColumnInfo(name = "mobile_number")
     private String mobileNumber;
 
     public UserDetails() {}
@@ -49,4 +50,5 @@ public class UserDetails {
     public void setId(int id) {
         this.id = id;
     }
+
 }
